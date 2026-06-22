@@ -799,7 +799,7 @@ function renderCards(grid, ids) {
     </div>`).join('');
 }
 
-let currentTab = 'wedding';
+let currentTab = 'dress';
 
 async function loadTab(key) {
   currentTab = key;
@@ -883,7 +883,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft')   lbNav(-1);
 });
 
-loadTab('wedding');
+loadTab('dress');
 
 // Nav scroll effect + active link
 const nav = document.getElementById('nav');
