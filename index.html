@@ -610,22 +610,27 @@
       <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       登記
     </button>
-    -->
     <button class="tab-btn active" data-tab="korea_dress" onclick="switchTab(this)">
+      <svg viewBox="0 0 24 24"><path d="M10.5 3 8 9l4 13 4-13-2.5-6"/><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z"/><path d="M2 9h20"/></svg>
+      韓國婚紗照
+    </button>
+    -->
+    <button class="tab-btn active" data-tab="all_dress" onclick="switchTab(this)">
       <svg viewBox="0 0 24 24"><path d="M10.5 3 8 9l4 13 4-13-2.5-6"/><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z"/><path d="M2 9h20"/></svg>
       未修婚紗照
     </button>
-    <button class="tab-btn" data-tab="dress" onclick="switchTab(this)">
+    <button class="tab-btn" data-tab="side_shot_dress" onclick="switchTab(this)">
       <svg viewBox="0 0 24 24"><path d="M12 2c-1.5 2-4 3-4 7h8c0-4-2.5-5-4-7z"/><path d="M8 9l-3 13h14L16 9"/></svg>
       側拍婚紗照
     </button>
   </div>
 
   <div class="gallery-grid"        id="grid-group"></div>
-  <div class="gallery-grid active" id="grid-korea_dress"></div>
+  <div class="gallery-grid"        id="grid-korea_dress"></div>
   <div class="gallery-grid"        id="grid-wedding"></div>
   <div class="gallery-grid"        id="grid-incard"></div>
-  <div class="gallery-grid"        id="grid-dress"></div>
+  <div class="gallery-grid active" id="grid-all_dress"></div>
+  <div class="gallery-grid"        id="grid-side_shot_dress"></div>
   <div class="gallery-grid"        id="grid-registry"></div>
 </section>
 
@@ -808,7 +813,7 @@ function renderCards(grid, ids) {
     </div>`).join('');
 }
 
-let currentTab = 'korea_dress';
+let currentTab = 'all_dress';
 
 async function loadTab(key) {
   currentTab = key;
@@ -892,7 +897,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft')   lbNav(-1);
 });
 
-loadTab('korea_dress');
+loadTab('all_dress');
 
 // Nav scroll effect + active link
 const nav = document.getElementById('nav');
