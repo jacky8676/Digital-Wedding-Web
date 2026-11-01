@@ -641,7 +641,7 @@
       <h2>Our Story</h2>
       <div class="gold-line">✦</div>
     </div>
-    <!-- <div class="video-wrap" style="position: relative; width: 100%; max-width: 380px; margin: 0 auto; aspect-ratio: 9 / 16;">
+    <div class="video-wrap" style="position: relative; width: 100%; max-width: 380px; margin: 0 auto; aspect-ratio: 9 / 16;">
      <iframe id="wedding-video" 
           src="https://youtube.com/watch?v=-vIMPLU36LU?si=GhUs4sHjsYpOB0Sb" 
           title="Jacky & Katy Wedding Film" 
@@ -651,8 +651,8 @@
           allowfullscreen
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
   </iframe>
-</div> -->
-    <div class="video-wrap" style="position: relative; width: 100%; max-width: 360px; margin: 0 auto; aspect-ratio: 9 / 16;">
+</div>
+    <!-- <div class="video-wrap" style="position: relative; width: 100%; max-width: 360px; margin: 0 auto; aspect-ratio: 9 / 16;">
   <video id="wedding-video" 
          src="./Wedding_invitation.mp4" 
          <!-- muted  -->
@@ -662,7 +662,7 @@
          controls
          style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
   </video>
-</div>
+</div> -->
 </section>
 
   
@@ -939,55 +939,55 @@ window.addEventListener('scroll', () => {
 document.addEventListener("DOMContentLoaded", function() {
     const video = document.getElementById('wedding-video');
     
-    // 建立滑動偵測
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // 滑動到影片位置：開始播放
-          video.play().catch(error => {
-            console.log("自動播放被瀏覽器攔截，使用者需點擊互動：", error);
-          });
-        } else {
-          // 滑離開畫面：自動暫停（省電、省效能）
-          video.pause();
-        }
-      });
-    }, { threshold: 0.3 }); // 影片露出 30% 就觸發播放
+  //   // 建立滑動偵測
+  //   const observer = new IntersectionObserver((entries) => {
+  //     entries.forEach(entry => {
+  //       if (entry.isIntersecting) {
+  //         // 滑動到影片位置：開始播放
+  //         video.play().catch(error => {
+  //           console.log("自動播放被瀏覽器攔截，使用者需點擊互動：", error);
+  //         });
+  //       } else {
+  //         // 滑離開畫面：自動暫停（省電、省效能）
+  //         video.pause();
+  //       }
+  //     });
+  //   }, { threshold: 0.3 }); // 影片露出 30% 就觸發播放
 
-    observer.observe(video);
-  });
-//   // 1. 動態載入 YouTube IFrame API
-// var tag = document.createElement('script');
-// tag.src = "https://youtube.com";
-// var firstScriptTag = document.getElementsByTagName('script')[0];
-// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  //   observer.observe(video);
+  // });
+  // 1. 動態載入 YouTube IFrame API
+var tag = document.createElement('script');
+tag.src = "https://youtube.com";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// var player;
-// function onYouTubeIframeAPIReady() {
-//     player = new YT.Player('wedding-video', {
-//       events: {
-//         'onReady': onPlayerReady
-//       }
-//     });
-//   }
+var player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('wedding-video', {
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
 
-// function onPlayerReady(event) {
-//   // 2. 建立滑動偵測器 (Intersection Observer)
-//   const observer = new IntersectionObserver((entries) => {
-//     entries.forEach(entry => {
-//       if (entry.isIntersecting) {
-//         // 當影片露出超過 40% 時，強制靜音並自動播放
-//         player.mute();
-//         player.playVideo();
-//       } else {
-//         // 當滑離開畫面時，自動暫停
-//         player.pauseVideo();
-//       }
-//     });
-//   }, { threshold: 0.4 }); // 0.4 代表影片出現 40% 就會觸發
+function onPlayerReady(event) {
+  // 2. 建立滑動偵測器 (Intersection Observer)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 當影片露出超過 40% 時，強制靜音並自動播放
+        player.mute();
+        player.playVideo();
+      } else {
+        // 當滑離開畫面時，自動暫停
+        player.pauseVideo();
+      }
+    });
+  }, { threshold: 0.4 }); // 0.4 代表影片出現 40% 就會觸發
 
-//   observer.observe(document.getElementById('wedding-video'));
-// }
+  observer.observe(document.getElementById('wedding-video'));
+}
 </script>
 </body>
 </html>
