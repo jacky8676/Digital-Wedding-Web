@@ -641,16 +641,20 @@
       <h2>Our Story</h2>
       <div class="gold-line">✦</div>
     </div>
-    <div class="video-wrap">
-      <iframe src="https://youtube.com/embed/-vIMPLU36LU?si=GhUs4sHjsYpOB0Sb"
-        title="Jacky & Katy Wedding Film"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
-    </div>
-  </div>
+    <div class="video-wrap" style="position: relative; width: 100%; max-width: 380px; margin: 0 auto; aspect-ratio: 9 / 16;">
+     <iframe id="wedding-video" 
+          src="https://youtube.com/embed/-vIMPLU36LU?si=GhUs4sHjsYpOB0Sb" 
+          title="Jacky & Katy Wedding Film" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  </iframe>
+</div>
 </section>
+
+  
 
 <section class="vendors" id="vendors">
   <div class="vendors-inner">
@@ -919,6 +923,38 @@ window.addEventListener('scroll', () => {
     a.classList.toggle('active', a.getAttribute('href') === '#' + current);
   });
 });
+  // 1. 動態載入 YouTube IFrame API
+var tag = document.createElement('script');
+tag.src = "https://youtube.com";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('wedding-video', {
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+
+function onPlayerReady(event) {
+  // 2. 建立滑動偵測器 (Intersection Observer)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 當影片露出超過 40% 時，強制靜音並自動播放
+        player.mute();
+        player.playVideo();
+      } else {
+        // 當滑離開畫面時，自動暫停
+        player.pauseVideo();
+      }
+    });
+  }, { threshold: 0.4 }); // 0.4 代表影片出現 40% 就會觸發
+
+  observer.observe(document.getElementById('wedding-video'));
+}
 </script>
 </body>
 </html>
